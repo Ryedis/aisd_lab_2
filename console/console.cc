@@ -2,9 +2,19 @@
 #include <iostream>
 
 using namespace linkedlist;
+using namespace std;
 
 int main() {
-	LinkedList<float> list(5);
-	cout << list;
+	LinkedList<int> list(5);
+
+	HanoiTowerSolver<int> Tower(list);
+	Tower.printTowerA();
+	Tower.solve();
+	cout <<"Steps: " << Tower.getNumMoves() << endl;
+	Tower.printTowerA();
+	Tower.printTowerB();
+	Tower.printTowerC();
+	
 	return 0;
 }
+

@@ -198,4 +198,58 @@ namespace linkedlist {
 			this->push_tail(rand() + 0.00001 * rand());
 		}
 	}
+
+	template <typename T>
+	class HanoiTowerSolver {
+	private:
+		LinkedList<T> towerA;
+		LinkedList<T> towerB;
+		LinkedList<T> towerC;
+
+		size_t numMoves;
+
+	public:
+		HanoiTowerSolver(const LinkedList<T>& list) : numMoves(0) {
+			towerA = list;
+		}
+
+		size_t getNumMoves() const {
+			return numMoves;
+		}
+
+		void printTowerA() const {
+			cout << "Tower A:\n" << towerA << endl;
+		}
+
+		void printTowerB() const {
+			cout << "Tower B:\n" << towerB << endl;
+		}
+
+		void printTowerC() const {
+			cout << "Tower C:\n" << towerC << endl;
+		}
+
+		void moveDisk(LinkedList<T>& source, LinkedList<T>& destination) {
+			
+			destination.push_head(source.get_head()->value);
+			source.pop_head();
+			numMoves++;
+		}
+
+		void solveHanoiTower(size_t numDisks, LinkedList<T>& source, LinkedList<T>& auxiliary, LinkedList<T>& destination) {
+			if (numDisks == 1) {
+				moveDisk(source, destination);
+			}
+			else {
+				solveHanoiTower(numDisks - 1, source, destination, auxiliary);
+				moveDisk(source, destination);
+				solveHanoiTower(numDisks - 1, auxiliary, source, destination);
+			}
+		}
+
+		void solve() {
+			size_t numDisks = towerA.size();
+			solveHanoiTower(numDisks, towerA, towerB, towerC);
+		}
+	};
 }
