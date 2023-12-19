@@ -109,22 +109,27 @@ namespace linkedlist {
 			if (!_head) {
 				return;
 			}
-			Node* ptr = _head;
-			Node* previous_ptr = nullptr;
+			Node<T>* ptr = _head;
+			Node<T>* previous_ptr = nullptr;
 
 			while (ptr) {
-				if (ptr->data == value) {
+				if (ptr->value == value) {
 					if (ptr == _head) {
 						_head = ptr->next;
+						delete ptr;
+						ptr = _head; // Переходим к следующему узлу
 					}
 					else {
 						previous_ptr->next = ptr->next;
+						Node<T>* temp = ptr;
+						ptr = ptr->next; // Переходим к следующему узлу
+						delete temp;
 					}
-					delete ptr;
-					break;
 				}
-				previous_ptr = ptr;
-				ptr = ptr->next;
+				else {
+					previous_ptr = ptr;
+					ptr = ptr->next;
+				}
 			}
 		}
 
