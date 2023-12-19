@@ -5,15 +5,15 @@ using namespace linkedlist;
 using namespace std;
 
 int main() {
-	LinkedList<int> list(5);
+	LinkedList<int> listA(10);
+	LinkedList<int> listC;
+	
+	cout <<"listA: " << listA << endl;
+	cout << "listC: " << listC << endl;
+	solve(listA, listC);
 
-	HanoiTowerSolver<int> Tower(list);
-	Tower.printTowerA();
-	Tower.solve();
-	cout <<"Steps: " << Tower.getNumMoves() << endl;
-	Tower.printTowerA();
-	Tower.printTowerB();
-	Tower.printTowerC();
+	cout << "listA: " << listA << endl;
+	cout << "listC: " << listC << endl;
 	
 	return 0;
 }

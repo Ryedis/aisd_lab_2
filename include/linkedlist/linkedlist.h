@@ -200,56 +200,28 @@ namespace linkedlist {
 	}
 
 	template <typename T>
-	class HanoiTowerSolver {
-	private:
-		LinkedList<T> towerA;
-		LinkedList<T> towerB;
-		LinkedList<T> towerC;
+	void solve(LinkedList<T>& source, LinkedList<T>& destination) {
+		size_t num_disks = source.size();
+		LinkedList<T> temp;
+		solve_hanoi_tower(num_disks, source, temp, destination);
+	}
 
-		size_t numMoves;
-
-	public:
-		HanoiTowerSolver(const LinkedList<T>& list) : numMoves(0) {
-			towerA = list;
+	template <typename T>
+	void solve_hanoi_tower(size_t num_disks, LinkedList<T>& source, LinkedList<T>& temp, LinkedList<T>& destination) {
+		if (num_disks == 1) {
+			move_disk(source, destination);
 		}
-
-		size_t getNumMoves() const {
-			return numMoves;
+		else {
+			solve_hanoi_tower(num_disks - 1, source, destination, temp);
+			move_disk(source, destination);
+			solve_hanoi_tower(num_disks - 1, temp, source, destination);
 		}
+	}
 
-		void printTowerA() const {
-			cout << "Tower A:\n" << towerA << endl;
-		}
+	template <typename T>
+	void move_disk(LinkedList<T>& source, LinkedList<T>& destination) {
 
-		void printTowerB() const {
-			cout << "Tower B:\n" << towerB << endl;
-		}
-
-		void printTowerC() const {
-			cout << "Tower C:\n" << towerC << endl;
-		}
-
-		void moveDisk(LinkedList<T>& source, LinkedList<T>& destination) {
-			
-			destination.push_head(source.get_head()->value);
-			source.pop_head();
-			numMoves++;
-		}
-
-		void solveHanoiTower(size_t numDisks, LinkedList<T>& source, LinkedList<T>& auxiliary, LinkedList<T>& destination) {
-			if (numDisks == 1) {
-				moveDisk(source, destination);
-			}
-			else {
-				solveHanoiTower(numDisks - 1, source, destination, auxiliary);
-				moveDisk(source, destination);
-				solveHanoiTower(numDisks - 1, auxiliary, source, destination);
-			}
-		}
-
-		void solve() {
-			size_t numDisks = towerA.size();
-			solveHanoiTower(numDisks, towerA, towerB, towerC);
-		}
-	};
+		destination.push_head(source.get_head()->value);
+		source.pop_head();
+	}
 }
