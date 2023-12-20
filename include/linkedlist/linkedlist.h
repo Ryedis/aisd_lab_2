@@ -37,9 +37,9 @@ namespace linkedlist {
 		LinkedList(size_t size) {};
 
 		LinkedList<T>& operator=(const LinkedList<T>& lst) {
-			LinkedList<T> a(lst);
-			std::swap(a._head, _head);
-			return a;
+			LinkedList<T> copy(lst);
+			std::swap(copy._head, _head);
+			return copy;
 		}
 
 		~LinkedList() {
@@ -48,7 +48,6 @@ namespace linkedlist {
 				_head = _head->next;
 				delete ptr;
 			}
-
 			_head = nullptr;
 		}
 
@@ -89,7 +88,6 @@ namespace linkedlist {
 			auto ptr = _head;
 			_head = _head->next;
 			delete ptr;
-			ptr = nullptr;
 
 		}
 
@@ -203,7 +201,7 @@ namespace linkedlist {
 			this->push_tail(rand() + 0.00001 * rand());
 		}
 	}
-
+	 
 	template <typename T>
 	void solve(LinkedList<T>& source, LinkedList<T>& destination) {
 		size_t num_disks = source.size();

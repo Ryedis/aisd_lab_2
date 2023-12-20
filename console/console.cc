@@ -50,6 +50,10 @@ int main() {
 	list7.delete_node(true);
 	cout << "delete_node in list7 for true: " << list7 << endl;
 
+	list6.delete_node(41);
+	cout << "delete_node in list6 for 41: " << list6 << endl;
+
+
 	cout << "operator [] read: " << list1[0] << endl;
 	list1[0] = 100000000;
 	cout << "operator [] write: " << list1[0] << endl;
